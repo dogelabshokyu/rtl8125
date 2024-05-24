@@ -15827,7 +15827,7 @@ static const struct net_device_ops rtl8125_netdev_ops = {
 #endif //LINUX_VERSION_CODE >= KERNEL_VERSION(5,11,0)
         .ndo_start_xmit     = rtl8125_start_xmit,
         .ndo_tx_timeout     = rtl8125_tx_timeout,
-        .ndo_change_mtu     = rtl8125_change_mtu,
+        //.ndo_change_mtu     = rtl8125_change_mtu,
         .ndo_set_mac_address    = rtl8125_set_mac_address,
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,15,0)
         .ndo_do_ioctl       = rtl8125_do_ioctl,
@@ -19382,9 +19382,9 @@ rtl8125_rx_interrupt(struct net_device *dev,
                 if (rtl8125_rx_vlan_skb(tp, desc, skb) < 0)
                         rtl8125_rx_skb(tp, skb, ring_index);
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
-                dev->last_rx = jiffies;
-#endif //LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
+//#if LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
+//                dev->last_rx = jiffies;
+//#endif //LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
                 total_rx_packets++;
 
 #ifdef ENABLE_PAGE_REUSE

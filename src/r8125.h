@@ -51,44 +51,44 @@
 #define fallthrough
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4,3,0)
-static inline
-ssize_t strscpy(char *dest, const char *src, size_t count)
-{
-        long res = 0;
+// #if LINUX_VERSION_CODE < KERNEL_VERSION(4,3,0)
+//static inline
+//ssize_t strscpy(char *dest, const char *src, size_t count)
+//{
+//        long res = 0;
+//
+//        if (count == 0)
+//                return -E2BIG;
+//
+//        while (count) {
+//                char c;
+//
+//                c = src[res];
+//                dest[res] = c;
+//                if (!c)
+//                        return res;
+//                res++;
+//                count--;
+//        }
+//
+//        /* Hit buffer length without finding a NUL; force NUL-termination. */
+//        if (res)
+//                dest[res-1] = '\0';
+//
+//        return -E2BIG;
+//}
+//#endif
 
-        if (count == 0)
-                return -E2BIG;
-
-        while (count) {
-                char c;
-
-                c = src[res];
-                dest[res] = c;
-                if (!c)
-                        return res;
-                res++;
-                count--;
-        }
-
-        /* Hit buffer length without finding a NUL; force NUL-termination. */
-        if (res)
-                dest[res-1] = '\0';
-
-        return -E2BIG;
-}
-#endif
-
-#if (LINUX_VERSION_CODE < KERNEL_VERSION(4,6,0))
-static inline unsigned char *skb_checksum_start(const struct sk_buff *skb)
-{
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,22))
-        return skb->head + skb->csum_start;
-#else /* < 2.6.22 */
-        return skb_transport_header(skb);
-#endif
-}
-#endif
+//#if (LINUX_VERSION_CODE < KERNEL_VERSION(4,6,0))
+//static inline unsigned char *skb_checksum_start(const struct sk_buff *skb)
+//{
+//#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,22))
+//        return skb->head + skb->csum_start;
+//#else /* < 2.6.22 */
+//        return skb_transport_header(skb);
+//#endif
+//}
+//#endif
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3,3,0)
 static inline void netdev_tx_sent_queue(struct netdev_queue *dev_queue,
@@ -153,17 +153,17 @@ static inline bool dev_page_is_reusable(struct page *page)
 #define device_set_wakeup_enable(dev, val)	do {} while (0)
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(3,14,0)
-static inline void ether_addr_copy(u8 *dst, const u8 *src)
-{
-        u16 *a = (u16 *)dst;
-        const u16 *b = (const u16 *)src;
-
-        a[0] = b[0];
-        a[1] = b[1];
-        a[2] = b[2];
-}
-#endif
+//#if LINUX_VERSION_CODE < KERNEL_VERSION(3,14,0)
+//static inline void ether_addr_copy(u8 *dst, const u8 *src)
+//{
+//        u16 *a = (u16 *)dst;
+//        const u16 *b = (const u16 *)src;
+//
+//        a[0] = b[0];
+//        a[1] = b[1];
+//        a[2] = b[2];
+//}
+//#endif
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(3,15,0)
 #define IS_ERR_OR_NULL(ptr)			(!ptr)
